@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatura do Cartão de Crédito</title>
+    <link rel ="stylesheet" href = "fatura_cartao.css">
+</head>
+<body>
+    <header>
+        <img src = "fatura.png" alt = "Fatura">
+        <h1><pre>Cartão de Crédito<br>   (Rotativo)</pre></h1>
+    </header>
+
+    <h2>Informe alguns dados</h2>
+
+    <form id="formulario" action="#">
+    
+        <div>
+          <label for="">Digite o valor total (R$) da fatura:</label>
+          <input id="cx-valor-fatura" type="number" step="0.01" placeholder="Valor da fatura">
+        </div>
+    
+        <div>
+          <label for="">Taxa mensal do Rotativo:</label>
+          <input id="cx-taxa-rotativo"  type="number" step="0.01" placeholder="Percentual mensal de juros do rotativo">
+        </div>
+    </form>
+
+    <h3>Plano de pagamento 1</h3>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Valor (R$) que pretende pagar:</label>
+          <input id="cx-valor-p1"  type="number" step="0.01" placeholder="Valor para o primeiro plano">
+        </div>
+
+        <div>
+            <label for="">Meses de atraso:</label>
+            <input id="cx-meses-atraso-p1"  type="number" placeholder="Quantidade de meses que o pagamento atrasou">
+        </div>
+    </form>
+
+    <h3>Plano de pagamento 2</h3>
+
+    <form id="formulario" action="#">
+        <div>
+            <label for="">Valor (R$) que pretende pagar:</label>
+            <input id="cx-valor-p2"  type="number" step="0.01" placeholder="Valor para o segundo plano">
+        </div>
+  
+        <div>
+            <label for="">Meses de atraso:</label>
+            <input id="cx-meses-atraso-p2"  type="number" placeholder="Quantidade de meses que o pagamento atrasou">
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <script>
+        function clique_botao_calcular(){
+        
+        //Entrada
+          const cx_valor_fatura = document.getElementById('cx-valor-fatura')
+          const cx_taxa_rotativo = document.getElementById('cx-taxa-rotativo')
+
+          const fatura_total = Number(cx_valor_fatura.value)
+          const taxa_rotativo = Number(cx_taxa_rotativo.value)
+        
+          //P1: Perguntar quanto vai pagar e Quanto tempo vai ficar sem pagar
+          const cx_valor_p1 = document.getElementById('cx-valor-p1')
+          const cx_meses_atraso_p1 = document.getElementById('cx-meses-atraso-p1')
+
+          const valor_p1 = Number(cx_valor_p1.value)
+          const meses_atraso_p1 = Number(cx_meses_atraso_p1.value)
+
+          //P2: Perguntar quanto vai pagar e Quanto tempo vai ficar sem pagar
+          const cx_valor_p2 = document.getElementById('cx-valor-p2')
+          const cx_meses_atraso_p2 = document.getElementById('cx-meses-atraso-p2')
+
+          const valor_p2 = Number(cx_valor_p2.value)
+          const meses_atraso_p2 = Number(cx_meses_atraso_p2.value)
+
+        //Processamento
+          const fatura_minimo = fatura_total * (20/100)
+
+          //Calcular montante/Fatura P1
+          const valor_residual_p1 = fatura_total - valor_p1
+          const fatura_p1 = calcular_fatura_futuro(valor_residual_p1, taxa_rotativo, meses_atraso_p1)
+          const crescimento_p1 = (((fatura_p1 + valor_p1) - fatura_total) / fatura_total) * 100
+
+          //Calcular montante/Fatura P2
+          const valor_residual_p2 = fatura_total - valor_p2
+          const fatura_p2 = calcular_fatura_futuro(valor_residual_p2, taxa_rotativo, meses_atraso_p2)
+          const crescimento_p2 = (((fatura_p2 + valor_p2) - fatura_total) / fatura_total) * 100
+
+        //Resultado
+          const resultado = `
+          - - - - - - - Detalhes da Fatura - - - - - -
+          Valor total: ${rs(fatura_total)}
+          Pagamento mínimo: ${rs(fatura_minimo)}
+          - - - - - - - - - Plano 1 - - - - - - - - -
+          Valor original da fatura: ${fatura_total}
+          Valor Pago: ${rs(valor_p1)}
+          Valor Residual: ${rs(valor_residual_p1)}
+          Fatura em ${meses_atraso_p1} meses de atraso será de ${rs(fatura_p1)}
+          % de crescimento em relação ao valor original: ${crescimento_p1.toFixed(2)}%
+          - - - - - - - - - Plano 2 - - - - - - - - -
+          Valor original da fatura: ${fatura_total}
+          Valor Pago: ${rs(valor_p2)}
+          Valor Residual: ${rs(valor_residual_p2)}
+          Fatura em ${meses_atraso_p2} meses de atraso será de ${rs(fatura_p2)}
+          % de crescimento em relação ao valor original: ${crescimento_p2.toFixed(2)}%`
+
+          alert(resultado)
+
+        }
+
+function rs(valor){
+    const formatado = `R$ ${(valor).toFixed(2)}`
+    return formatado
+}
+
+function calcular_fatura_futuro(valor, taxa, meses){
+    const valor_futuro = valor + juros_compostos(valor, taxa, meses)
+    return valor_futuro
+}
+
+function juros_compostos(c, i, t){
+    const montante = c * (1 + (i/100))**t
+    const juros = montante - c
+    return juros
+}
+
+    </script>
+
+</body>
+</html>
