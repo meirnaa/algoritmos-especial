@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opção</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 11)</pre></h1></header>
+    </header>
+
+    <h2>Escolher um entre os números 1, 2 ou 3 e obter respectiva resposta.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite um número:</label>
+          <input id="cx-num-1" type="number" placeholder="primeiro número">
+        </div>
+
+        <div>
+            <label for="">Digite um número:</label>
+            <input id="cx-num-2" type="number" placeholder="segundo número">
+          </div>
+
+        <div>
+           <label for="">Digite um número:</label>
+           <input id="cx-num-3" type="number" placeholder="terceiro número">
+        </div>
+
+        <div>
+            <label for="">Escolha uma opção:</label>
+            <input id="cx-opcao" type="number" placeholder="1, 2 ou 3">
+        </div>
+
+        <div id="botoes-2">
+            <input type="reset" value="Limpar">
+            <input onclick="clique_botao_calcular()" type="button" value="Calcular">
+        </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="verificar_opcao"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_num_1 = document.getElementById('cx-num-1')
+        const cx_num_2 = document.getElementById('cx-num-2')
+        const cx_num_3 = document.getElementById('cx-num-3')
+        const cx_opcao = document.getElementById('cx-opcao')
+
+        const num_1 = Number(cx_num_1.value)
+        const num_2 = Number(cx_num_2.value)
+        const num_3 = Number(cx_num_3.value)
+        const opcao = Number(cx_opcao.value)
+
+        //Processamento
+        const verificar_opcao = verificar_opcao_escolhida(num_1, num_2, num_3, opcao)
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('verificar_opcao')
+            elemento_resultado.innerText = verificar_opcao
+}
+
+
+function verificar_opcao_escolhida(num_1, num_2, num_3, opcao){
+if(opcao === 1){
+    return `\nValor escolhido: ${num_1}\n`
+}
+else if(opcao === 2){
+    return `\nValor escolhido: ${num_2}\n`
+}
+else if(opcao === 3){
+    return `\nValor escolhido: ${num_3}\n`
+}
+else{
+    return `\nA opção escolhida não é válida.\n`
+}
+}
+
+        
+    </script>
+
+</body>
+</html>

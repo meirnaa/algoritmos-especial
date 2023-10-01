@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadrante de um Ângulo</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 20)</pre></h1></header>
+    </header>
+
+    <h2>Descubra a qual quadrante um ângulo pertence.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite o valor do ângulo:</label>
+          <input id="cx-angulo" type="number" placeholder="ângulo entre 0° e 360°">
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_angulo = document.getElementById('cx-angulo')
+        const angulo = Number(cx_angulo.value)
+
+        ///Processamento
+        const quadrante = verificar_quadrante(angulo)
+        const resultado = `\nO ângulo se localiza no ${quadrante} quadrante.\n`
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+            elemento_resultado.innerText = resultado
+        }
+
+       
+        function verificar_quadrante(angulo){
+        if(angulo >= 0 && angulo <= 90){
+            return 'primeiro'
+        }
+        else if(angulo > 90 && angulo <= 180){
+            return 'segundo'
+        }
+        else if(angulo > 180 && angulo <= 270){
+            return 'terceiro'
+        }
+        else{
+            return 'quarto'
+        }
+        }
+
+
+    </script>
+
+</body>
+</html>

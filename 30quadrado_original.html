@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadrado Original</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 30)</pre></h1></header>
+    </header>
+
+    <h2>Digite um número de 4 dígitos e verificarei se ele é um quadrado original.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+            <label for="">Número:</label>
+            <input id="cx-numero" type="number" placeholder="1000 a 9999">
+        </div>
+    </form>
+    <div id="botoes">
+        <input onclick="window.location.reload()" type="submit" value="Limpar">
+        <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_numero = document.getElementById('cx-numero')
+
+        const numero = Number(cx_numero.value)
+            
+        //Processamento
+        const qua_original = verificar_numero(numero)
+        const resultado = `\n${qua_original}\n`
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+        elemento_resultado.innerText = resultado
+        }
+
+
+        function verificar_numero(numero){
+        if(numero > 9999){
+            return (`Digite um número de apenas 4 dígitos!`)
+        }
+        else{
+        let dez1 = Math.floor(numero / 100)
+        let dez2 = numero % 100
+        let soma = dez1 + dez2
+
+            if(soma**2 === numero){
+                return (`Foram gerados os números ${dez1} e ${dez2} e a soma desses números, ${soma}, ao quadrado é igual ao número ${numero}`)
+            }
+
+            else if(soma**2 !== numero){
+                return (`Foram gerados os números ${dez1} e ${dez2} e a soma desses números, ${soma}, ao quadrado é igual a ${soma**2}`)
+            }
+        }
+        }
+
+        
+    </script>
+
+</body>
+</html>

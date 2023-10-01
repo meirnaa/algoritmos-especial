@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data mais recente</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 23)</pre></h1></header>
+    </header>
+
+    <h2>Digite duas datas e irei dizer qual a mais recente.</h2>
+
+    <form id="formulario" action="#">
+        <h3>Primeira data</h3>
+        <div>
+          <label for="">Dia:</label>
+          <input id="cx-dia1" type="number" placeholder="1 a 30">
+        </div>
+
+        <div>
+            <label for="">Mês:</label>
+            <input id="cx-mes1" type="number" placeholder="1 a 12">
+          </div>
+
+        <div>
+           <label for="">Ano:</label>
+           <input id="cx-ano1" type="number" placeholder="ex: 2023">
+        </div>
+
+        <h3>Segunda data</h3>
+        <div>
+            <label for="">Dia:</label>
+            <input id="cx-dia2" type="number" placeholder="1 a 30">
+          </div>
+  
+          <div>
+              <label for="">Mês:</label>
+              <input id="cx-mes2" type="number" placeholder="1 a 12">
+            </div>
+  
+          <div>
+             <label for="">Ano:</label>
+             <input id="cx-ano2" type="number" placeholder="ex: 2007">
+          </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        //Data 1
+        const cx_dia1 = document.getElementById('cx-dia1')
+        const cx_mes1 = document.getElementById('cx-mes1')
+        const cx_ano1 = document.getElementById('cx-ano1')
+
+        const dia1 = Number(cx_dia1.value)
+        const mes1 = Number(cx_mes1.value)
+        const ano1 = Number(cx_ano1.value)
+        
+        //Data 2
+        const cx_dia2 = document.getElementById('cx-dia2')
+        const cx_mes2 = document.getElementById('cx-mes2')
+        const cx_ano2 = document.getElementById('cx-ano2')
+
+        const dia2 = Number(cx_dia2.value)
+        const mes2 = Number(cx_mes2.value)
+        const ano2 = Number(cx_ano2.value)
+
+        //Processamento
+        const data1 = data_eh_valida(dia1, mes1, ano1)
+        const data2 = data_eh_valida(dia2, mes2, ano2)
+        const data_mais_recente = verificar_datas(data1, dia1, mes1, ano1, data2, dia2, mes2, ano2)
+        const resultado = `\n${data_mais_recente}\n`
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+        elemento_resultado.innerText = resultado
+        }
+
+
+        function verificar_datas(data1, dia1, mes1, ano1, data2, dia2, mes2, ano2){
+            if(data1 === true && data2 === true){
+                if(ano1 > ano2){
+                    return `A data ${dia1}/${mes1}/${ano1} é a mais recente`
+                }
+                else if(ano2 > ano1){
+                    return `A data ${dia2}/${mes2}/${ano2} é a mais recente`
+                }
+                else{ // mesmo ano
+                    
+                    if((9 - mes1) > (9 - mes2)){
+                        return `A data ${dia2}/${mes2}/${ano2} é a mais recente`
+                    }
+                    else if((9 - mes1) < (9 - mes2)){
+                        return `A data ${dia1}/${mes1}/${ano1} é a mais recente`
+                    }
+                    else{ //mesmo mes
+                        
+                        if((15 - dia1) < (15 - dia2)){
+                            return `A data ${dia1}/${mes1}/${ano1} é a mais recente`
+                        }else if((15 - dia1) > (15 - dia2)){
+                            return `A data ${dia2}/${mes2}/${ano2} é a mais recente`
+                        }else{
+                            return `Datas iguais`
+                        }
+                    }
+
+                }
+            }else{
+                return `Digite uma data válida`
+            }
+        }
+        
+        function data_eh_valida(dia, mes, ano){
+        const dias_por_mes = [31, ano_eh_bissexto(ano) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        
+        if(dia > 0 && dia <= dias_por_mes[mes - 1] && mes > 0 && mes <= 12 && ano >= 1) {
+            return true
+        }else{
+            return false
+        }
+        }
+
+
+        function ano_eh_bissexto(ano){
+            return (ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0)
+        }
+
+        
+    </script>
+
+</body>
+</html>

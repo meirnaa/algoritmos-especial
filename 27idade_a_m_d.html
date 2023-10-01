@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua idade em anos, meses e dias</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 27)</pre></h1></header>
+    </header>
+
+    <h2>Digite a data atual e a data de nascimento e irei dizer sua idade em anos, meses e dias.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Dia atual:</label>
+          <input id="cx-dia-atual" type="number" placeholder="1 a 30">
+        </div>
+
+        <div>
+            <label for="">Mês atual:</label>
+            <input id="cx-mes-atual" type="number" placeholder="1 a 12">
+          </div>
+
+        <div>
+           <label for="">Ano atual:</label>
+           <input id="cx-ano-atual" type="number" placeholder="ex: 2023">
+        </div>
+        
+        <div>
+            <label for="">Dia do nascimento:</label>
+            <input id="cx-dia-nasc" type="number" placeholder="1 a 30">
+          </div>
+  
+          <div>
+              <label for="">Mês do nascimento:</label>
+              <input id="cx-mes-nasc" type="number" placeholder="1 a 12">
+            </div>
+  
+          <div>
+             <label for="">Ano do nascimento:</label>
+             <input id="cx-ano-nasc" type="number" placeholder="ex: 2000">
+          </div>
+    </form>
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="idade"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_dia_atual = document.getElementById('cx-dia-atual')
+        const cx_mes_atual = document.getElementById('cx-mes-atual')
+        const cx_ano_atual = document.getElementById('cx-ano-atual')
+        const cx_dia_nasc = document.getElementById('cx-dia-nasc')
+        const cx_mes_nasc = document.getElementById('cx-mes-nasc')
+        const cx_ano_nasc = document.getElementById('cx-ano-nasc')
+
+        const dia_atual = Number(cx_dia_atual.value)
+        const mes_atual = Number(cx_mes_atual.value)
+        const ano_atual = Number(cx_ano_atual.value)
+        const dia_nasc = Number(cx_dia_nasc.value)
+        const mes_nasc = Number(cx_mes_nasc.value)
+        const ano_nasc = Number(cx_ano_nasc.value)
+
+        //Processamento
+        const idade = calcular_idade(dia_atual, mes_atual, ano_atual, dia_nasc, mes_nasc, ano_nasc)
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('idade')
+            elemento_resultado.innerText = idade
+        }
+
+
+        function calcular_idade(dia_atual, mes_atual, ano_atual, dia_nasc, mes_nasc, ano_nasc) {
+        const dias_por_mes = [31,eh_ano_bissexto(ano_nasc) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,]
+        let anos = ano_atual - ano_nasc
+        let meses = mes_atual - mes_nasc
+        let dias = dia_atual - dia_nasc
+
+        if(meses > 12){
+        anos += Math.floor(meses / 12)
+        meses = meses % 12
+        }
+
+        if(dia_atual < dia_nasc){
+            meses -= 1
+            dias += dias_por_mes[mes_nasc - 1]
+        }
+
+        if(mes_atual < mes_nasc || (mes_atual === mes_nasc && dia_atual < dia_nasc)){
+            anos = anos - 1
+            meses = 12 - mes_nasc + mes_atual
+            if (dia_atual < dia_nasc) {
+                meses -= 1
+                dias = dias_por_mes[mes_nasc - 1] - dia_nasc + dia_atual
+            }else{
+                dias = dia_atual - dia_nasc
+            }
+        }
+            return `\nVocê tem ${anos} anos, ${meses} meses e ${dias} dias\n`
+        }
+
+
+        function eh_ano_bissexto(ano) {
+            return (ano % 4 === 0 && ano % 100 !== 0) || ano % 400 === 0
+        }
+
+
+    </script>
+
+</body>
+</html>

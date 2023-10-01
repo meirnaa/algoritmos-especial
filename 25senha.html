@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senha</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 25)</pre></h1></header>
+    </header>
+
+    <h2>Verificando a senha</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Senha:</label>
+          <input id="cx-senha" type="number">
+        </div>
+        
+        <div id="botoes-2">
+            <input type="reset" value="Limpar">
+            <input onclick="clique_botao_calcular()" type="button" value="Calcular">
+        </div>
+    </form>
+        
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_senha = document.getElementById('cx-senha')
+        const senha = Number(cx_senha.value)
+
+        //Processamento
+        const permissao = verificar_senha(senha)
+        const resultado = `\n${permissao}\n`
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+        elemento_resultado.innerText = resultado
+        }
+
+        
+        function verificar_senha(senha){
+        if(senha === 1234){
+            return `Acesso permitido`
+        }else{
+            return `Acesso negado`
+        }
+        }
+
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 18)</pre></h1></header>
+    </header>
+
+    <h2>Digite 2 valores e escolha uma operação.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Primeiro valor:</label>
+          <input id="cx-valor-1" type="number">
+        </div>
+    
+        <div>
+          <label for="">Segundo valor:</label>
+          <input id="cx-valor-2"  type="number">
+        </div>
+
+        <div id="caixa-opcao">        
+        <label for="">Escolha uma operação:</label>
+
+        <select name="operacao" id="cx-operacao">
+        <option value="1">Adição</option>
+        <option value="2">Subtração</option>
+        <option value="3">Multiplicação</option>
+        <option value="4">Divisão</option>
+        </select>
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_valor_1 = document.getElementById('cx-valor-1')
+        const cx_valor_2 = document.getElementById('cx-valor-2')
+        const cx_operacao = document.getElementById('cx-operacao')
+
+        const valor_1 = Number(cx_valor_1.value)
+        const valor_2 = Number(cx_valor_2.value)
+        const operacao = Number(cx_operacao.value)
+
+        //Processamento
+        const resultado = calcular_operacao(operacao, valor_1, valor_2)
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+            elemento_resultado.innerText = resultado
+        }
+
+
+        function calcular_operacao(operacao, valor_1, valor_2){
+        if(operacao === 1){
+            return `\n${valor_1 + valor_2}\n`
+        }
+        else if(operacao === 2){
+            return `\n${valor_1 - valor_2}\n`
+        }
+        else if(operacao === 3){
+            return `\n${valor_1 * valor_2}\n`
+        }else{
+            return `\n${valor_1 / valor_2}\n`
+        }
+        }
+
+
+    </script>
+
+</body>
+</html>

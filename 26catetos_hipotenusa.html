@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catetos e Hipotenusa</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 26)</pre></h1></header>
+    </header>
+
+    <h2>Digite 3 lados e direi quais os catetos e qual a hipotenusa do triângulo.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+            <label for="">Lado 1:</label>
+            <input id="cx-lado1" type="number">
+        </div>
+
+        <div>
+            <label for="">Lado 2:</label>
+            <input id="cx-lado2" type="number">
+        </div>
+
+        <div>
+            <label for="">Lado 3:</label>
+            <input id="cx-lado3" type="number">
+        </div>
+
+        <div id="botoes-2">
+            <input type="reset" value="Limpar">
+            <input onclick="clique_botao_calcular()" type="button" value="Calcular">
+        </div>
+    </form>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_lado1 = document.getElementById('cx-lado1')
+        const cx_lado2 = document.getElementById('cx-lado2')
+        const cx_lado3 = document.getElementById('cx-lado3')
+
+        const lado1 = Number(cx_lado1.value)
+        const lado2 = Number(cx_lado2.value)
+        const lado3 = Number(cx_lado3.value)
+
+        //Processamento
+        const validar = entrada_eh_valida(lado1, lado2, lado3)
+        let resultado
+
+        if (validar === true) {
+
+        const pergunta = eh_triangulo(lado1, lado2, lado3)
+        const catetos_e_hipotenusa = verificar_triangulo(lado1, lado2, lado3)
+
+        if(pergunta === false){
+            resultado = `\nOs lados não formam um triângulo.\n`
+        }
+        else{
+            resultado = `\n${catetos_e_hipotenusa}\n`
+        }
+        } else if(validar === false) {
+            resultado = `\nNão existe lado com tamanho 0 (zero) ou negativo.\n`
+        }
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+        elemento_resultado.innerText = resultado
+        }
+
+
+        function entrada_eh_valida(lado1, lado2, lado3){
+        if(lado1 > 0 && lado2 > 0 && lado3 > 0){
+            return true
+        }else{
+            return false
+        }
+        }
+
+
+        function eh_triangulo(lado1, lado2, lado3){   //(a soma de dois lados não pode ser menor que o terceiro lado)
+        if (lado1 + lado2 > lado3 && lado1 + lado3 > lado2 && lado2 + lado3 > lado1){
+            return true
+        }else{
+            return false
+        }
+        }
+
+
+        function verificar_triangulo(lado1, lado2, lado3){
+        if(lado1**2 === (lado2**2) + (lado3**2)){ //
+            return `Hipotenusa: ${lado1}\nCateto1: ${lado2}\nCateto2: ${lado3}`
+        }
+        else if(lado2**2 === (lado1**2) + (lado3**2)){ 
+            return `Hipotenusa: ${lado2}\nCateto1: ${lado1}\nCateto2: ${lado3}`
+        }
+        else{ 
+            return `Hipotenusa: ${lado3}\nCateto1: ${lado2}\nCateto2: ${lado1}`
+        }
+        }
+
+        
+    </script>
+
+</body>
+</html>

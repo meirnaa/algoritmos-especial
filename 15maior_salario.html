@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maior salário</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 15)</pre></h1></header>
+    </header>
+
+    <h2>Qual entre dois professores têm salário total maior?</h2>
+
+    <form id="formulario" action="#">
+        <h3>Professor 1</h3>
+        <div>
+          <label for="">Qual seu nome?</label>
+          <input id="cx-prof1" type="text">
+        </div>
+
+        <div>
+            <label for="">Quantas horas você trabalha?</label>
+            <input id="cx-horas-prof1" type="number">
+        </div>
+
+        <div>
+           <label for="">Quanto (R$) você recebe por hora?</label>
+           <input id="cx-valor-horas-prof1" type="number" step="0.01" placeholder="R$">
+        </div>
+
+        <h3>Professor 2</h3>
+        <div>
+          <label for="">Qual seu nome?</label>
+          <input id="cx-prof2" type="text">
+        </div>
+
+        <div>
+            <label for="">Quantas horas você trabalha?</label>
+            <input id="cx-horas-prof2" type="number">
+          </div>
+
+        <div>
+           <label for="">Quanto você recebe por hora?</label>
+           <input id="cx-valor-horas-prof2" type="number" step="0.01" placeholder="R$">
+        </div>
+
+         <div id="botoes-2">
+            <input type="reset" value="Limpar">
+            <input onclick="clique_botao_calcular()" type="button" value="Calcular">
+          </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada        
+        //professor 1
+        const cx_prof1 = document.getElementById('cx-prof1')
+        const cx_horas_prof1 = document.getElementById('cx-horas-prof1')
+        const cx_valor_horas_prof1 = document.getElementById('cx-valor-horas-prof1')
+
+        const prof1 = String(cx_prof1.value)
+        const horas_prof1 = Number(cx_horas_prof1.value)
+        const valor_hora_prof1 = Number(cx_horas_prof1.value)
+
+        //professor 2
+        const cx_prof2 = document.getElementById('cx-prof2')
+        const cx_horas_prof2 = document.getElementById('cx-horas-prof2')
+        const cx_valor_hora_prof2 = document.getElementById('cx-valor-horas-prof2')
+
+        const prof2 = String(cx_prof2.value)
+        const horas_prof2 = Number(cx_horas_prof2.value)
+        const valor_hora_prof2 = Number(cx_horas_prof2.value)
+
+        //Processamento
+        const salario_prof1 = calcular_salario(horas_prof1, valor_hora_prof1)
+        const salario_prof2 = calcular_salario(horas_prof2, valor_hora_prof2)
+        let resultado
+        
+        //Saída
+        if(salario_prof1 > salario_prof2){
+            resultado = `\nO professor ${prof1} tem salário total maior\n`
+        }else if(salario_prof1 === salario_prof2){
+            resultado = `\nOs dois tem salário total igual\n`
+        }else{
+            resultado = `\nO professor ${prof2} tem salário total maior\n`
+        }
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+            elemento_resultado.innerText = resultado
+        }
+
+        function calcular_salario(horas, valor_hora){
+            return horas * valor_hora
+        }
+
+        
+    </script>
+
+</body>
+</html>

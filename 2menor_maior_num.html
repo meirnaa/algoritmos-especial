@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menor e maior número</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 2)</pre></h1></header>
+    </header>
+
+    <h2>Digite 2 números e irei verificar o maior e o menor.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite o primeiro número:</label>
+          <input id="cx-numero-1" type="number">
+        </div>
+    
+        <div>
+          <label for="">Digite o segundo número:</label>
+          <input id="cx-numero-2"  type="number">
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="verificar_numeros"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_numero_1 = document.getElementById('cx-numero-1')
+        const cx_numero_2 = document.getElementById('cx-numero-2')
+
+        const numero_1 = Number(cx_numero_1.value)
+        const numero_2 = Number(cx_numero_2.value)
+
+        //Processamento
+        const verificar_numeros = verificar_menor_maior(numero_1, numero_2)
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('verificar_numeros')
+            elemento_resultado.innerText = verificar_numeros
+        }  
+
+
+        function verificar_menor_maior(numero_1, numero_2){
+        if(numero_1 === numero_2){
+            return '\nOs números são iguais.'
+        }
+        else if(numero_1 > numero_2){
+            return `\nMaior: ${numero_1}\nMenor: ${numero_2}`
+        }
+        else{
+            return `\nMaior: ${numero_2}\nMenor: ${numero_1}`
+        }
+        }
+
+
+    </script>
+
+</body>
+</html>

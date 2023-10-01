@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Média e Valores acima</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 14)</pre></h1></header>
+    </header>
+
+    <h2>Digite 5 números INTEIROS e irei calcular a média entre eles e verificar qual está acima da média.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite o primeiro número:</label>
+          <input id="cx-numero-1" type="number">
+        </div>
+    
+        <div>
+          <label for="">Digite o segundo número:</label>
+          <input id="cx-numero-2"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o terceiro número:</label>
+            <input id="cx-numero-3"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o quarto número:</label>
+            <input id="cx-numero-4"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o quinto número:</label>
+            <input id="cx-numero-5"  type="number">
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="verificar_numeros"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_numero_1 = document.getElementById('cx-numero-1')
+        const cx_numero_2 = document.getElementById('cx-numero-2')
+        const cx_numero_3 = document.getElementById('cx-numero-3')
+        const cx_numero_4 = document.getElementById('cx-numero-4')
+        const cx_numero_5 = document.getElementById('cx-numero-5')
+
+        const numero_1 = Number(cx_numero_1.value)
+        const numero_2 = Number(cx_numero_2.value)
+        const numero_3 = Number(cx_numero_3.value)
+        const numero_4 = Number(cx_numero_4.value)
+        const numero_5 = Number(cx_numero_5.value)
+
+        //Processamento
+        const media = calcular_media(numero_1, numero_2, numero_3, numero_4, numero_5)
+        const valores_acima_media = verificar_acima_media(media, numero_1, numero_2, numero_3, numero_4, numero_5)
+        const verificar_numeros = `\Média dos números: ${media}\n\nValores acima da média: ${valores_acima_media}\n`
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('verificar_numeros')
+            elemento_resultado.innerText = verificar_numeros
+        }
+
+
+function calcular_media(num_1, num_2, num_3, num_4, num_5){
+    const media = (num_1 + num_2 + num_3 + num_4 + num_5) / 5
+    return media
+}
+
+
+function verificar_acima_media(media, num_1, num_2, num_3, num_4, num_5){
+    let valoresAcimaMedia = ` `
+
+    if (num_1 > media) {
+        valoresAcimaMedia += num_1 + `; `
+    }
+    if (num_2 > media) {
+        valoresAcimaMedia += num_2 + `; `
+    }
+    if (num_3 > media) {
+        valoresAcimaMedia += num_3 + `; `
+    }
+    if (num_4 > media) {
+        valoresAcimaMedia += num_4 + `; `
+    }
+    if (num_5 > media) {
+        valoresAcimaMedia += num_5 + `; `
+    }
+
+    return valoresAcimaMedia
+}
+
+
+    </script>
+
+</body>
+</html>

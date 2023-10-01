@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprovação</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 16)</pre></h1></header>
+    </header>
+
+    <h2>Digite suas notas e irei verificar sua situação final.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite a primeira nota:</label>
+          <input id="cx-nota1" type="number">
+        </div>
+
+        <div>
+            <label for="">Digite a segunda nota:</label>
+            <input id="cx-nota2" type="number">
+        </div>
+
+        <div id="exame-final" style="display: none; padding-top: 20px;">
+            <label for="">Digite a nota do exame final:</label>
+            <input id="cx-exame-final" type="number">
+        </div>
+
+         <div id="botoes-2">
+            <input type="reset" value="Limpar">
+            <input onclick="clique_botao_calcular()" type="button" value="Calcular">
+        </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_nota1 = document.getElementById('cx-nota1')
+        const cx_nota2 = document.getElementById('cx-nota2')
+
+        const nota1 = Number(cx_nota1.value)
+        const nota2 = Number(cx_nota2.value)
+
+        //Calcular média
+        const media = calcular_media(nota1, nota2)
+        let resultado
+
+        //Avaliar média
+        if(media >= 7){
+            resultado = `\nAprovado\n` //Saída
+
+        }else{
+            const exameFinalDiv = document.getElementById('exame-final')
+            exameFinalDiv.style.display = 'block' // Tornar visível o campo de entrada do exame final
+
+            const cx_exame_final = document.getElementById('cx-exame-final')
+            const exame_final = Number(cx_exame_final.value) //Obtendo a nota do exame final
+
+            const media_final = calcular_media(media, exame_final) //Calculando média final
+            resultado = verificar_aprovacao(media_final) //Verificar novamente
+        }
+        //Saída
+        const elemento_resultado = document.getElementById('resultado')
+        elemento_resultado.innerText = resultado
+        }
+
+        
+        function calcular_media(nota1, nota2){
+        const media = (nota1 + nota2) / 2
+        return media
+        }
+
+
+        function verificar_aprovacao(media_final){
+        if(media_final >= 5){
+            return `\nAprovado.\n`
+        }else{
+            return `\nReprovado.\n`
+        }
+        }
+
+        
+    </script>
+
+</body>
+</html>

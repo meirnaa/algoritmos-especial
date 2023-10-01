@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número primo</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 9)</pre></h1></header>
+    </header>
+
+    <h2>Digite um número entre zero e cem e irei verificar se ele é primo.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite um número entre zero e cem:</label>
+          <input id="cx-numero" type="number" placeholder="0 a 100">
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="verificar_numero"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_numero = document.getElementById('cx-numero')
+
+        const numero = Number(cx_numero.value)
+
+        //Processamento
+        const verificar_numero = eh_numero_primo(numero)
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('verificar_numero')
+            elemento_resultado.innerText = verificar_numero
+        }
+
+        
+        function eh_numero_primo(numero){
+        if((numero === 0) || (numero === 1)){
+            return `\nO número ${numero} não é primo.\n`
+        }
+        else if((numero > 2) && (numero % 2 === 0)){
+            return `\nO número ${numero} não é primo.\n`
+        }
+        else if((numero > 3) && (numero % 3 === 0)){
+            return `\nO número ${numero} não é primo.\n`
+        }
+        else if((numero > 5) && (numero % 5 === 0)){
+            return `\nO número ${numero} não é primo.\n`
+        }
+        else if((numero > 7) && (numero % 7 === 0)){
+            return `\nO número ${numero} não é primo.\n`
+        }
+        else if((numero > 11) && (numero % 11 === 0)){
+            return `\nO número ${numero} não é primo.\n`
+        }
+        else{
+            return `\nO número ${numero} é primo.\n`
+        }
+        }
+
+
+    </script>
+
+</body>
+</html>

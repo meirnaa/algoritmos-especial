@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duração da partida</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 22)</pre></h1></header>
+    </header>
+
+    <h2>Calculando a duração de um jogo (horas e minutos), sabendo-se que o TEMPO MÁXIMO de duração do jogo é de 24 HORAS.</h2>
+
+    <form id="formulario" action="#">
+        <h3>Quando o jogo iniciou?</h3>
+        <div>
+          <label for="">Horas:</label>
+          <input id="cx-hora-inicio" type="number" placeholder="0 a 23h">
+        </div>
+
+        <div>
+            <label for="">Minutos:</label>
+            <input id="cx-minutos-inicio" type="number" placeholder="0 a 59min">
+        </div>
+
+        <h3>Quando o jogo terminou?</h3>
+        <div>
+          <label for="">Horas:</label>
+          <input id="cx-hora-fim" type="number" placeholder="0 a 23h">
+        </div>
+
+        <div>
+            <label for="">Minutos:</label>
+            <input id="cx-minutos-fim" type="number" placeholder="0 a 59min">
+        </div>
+    </form>
+
+        <div id="botoes-2">
+            <input type="reset" value="Limpar">
+            <input onclick="clique_botao_calcular()" type="button" value="Calcular">
+        </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_hora_inicio = document.getElementById('cx-hora-inicio')
+        const cx_minutos_inicio = document.getElementById('cx-minutos-inicio')
+        const cx_hora_fim = document.getElementById('cx-hora-fim')
+        const cx_minutos_fim = document.getElementById('cx-minutos-fim')
+
+        const hora_inicio = Number(cx_hora_inicio.value)
+        const minutos_inicio = Number(cx_minutos_inicio.value)
+        const hora_fim = Number(cx_hora_fim.value)
+        const minutos_fim = Number(cx_minutos_fim.value)
+
+        //Processamento
+        const duracao = verificar_duracao(hora_inicio, hora_fim, minutos_inicio, minutos_fim)
+        const resultado = `\n${duracao}\n`    
+    
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+        elemento_resultado.innerText = resultado
+        }
+
+        function verificar_duracao(hora_inicio, hora_fim, minutos_inicio, minutos_fim){
+            let duracao_em_minutos
+            let horas
+            let minutos
+
+            if(hora_fim > hora_inicio){
+
+                duracao_em_minutos = (((hora_fim - hora_inicio) * 60) - minutos_inicio) + minutos_fim
+                horas = Math.floor(duracao_em_minutos / 60)
+                minutos = duracao_em_minutos % 60
+                return `A partida terminou no mesmo dia e durou ${horas}h e ${minutos}min`
+
+            }else if(hora_fim < hora_inicio){
+
+                duracao_em_minutos = ((( 24 - (hora_inicio - hora_fim)) * 60) - minutos_inicio) + minutos_fim
+                horas = Math.floor(duracao_em_minutos / 60)
+                minutos = duracao_em_minutos % 60
+                return `A partida terminou no dia seguinte e durou ${horas}h e ${minutos}min`
+
+            }else{ //hora_inicio === hora_fim
+                if(minutos_inicio > minutos_fim){
+                    duracao_em_minutos = ((( 24 - (hora_inicio - hora_fim)) * 60) - minutos_inicio) + minutos_fim
+                    horas = Math.floor(duracao_em_minutos / 60)
+                    minutos = duracao_em_minutos % 60
+                    return `A partida terminou no dia seguinte e durou ${horas}h e ${minutos}min`
+                }
+                else if(minutos_inicio < minutos_fim){
+                    horas = 0
+                    minutos = minutos_fim - minutos_inicio
+                    return `A partida terminou no mesmo dia e durou ${horas}h e ${minutos}min`
+                }
+                else{
+                    return `A partida terminou no dia seguinte e durou 24h`
+                }
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ímpar ou Par</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 12)</pre></h1></header>
+    </header>
+
+    <h2>Digite um número INTEIRO e irei verificar se ele ímpar ou par.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite um número:</label>
+          <input id="cx-numero" type="number" placeholder="digite um número inteiro">
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="verificar_numero"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_numero = document.getElementById('cx-numero')
+
+        const numero = Number(cx_numero.value)
+
+        //Processamento
+        const verificar_numero = verificar_par_impar(numero)
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('verificar_numero')
+            elemento_resultado.innerText = verificar_numero
+        }
+
+        
+        function verificar_par_impar(numero){
+        if(numero % 2 === 0){
+            return `\nO número ${numero} é par.\n`
+        }
+        else{
+            return `\nO número ${numero} é ímpar.\n`
+        }
+        }
+
+
+    </script>
+
+</body>
+</html>

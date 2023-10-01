@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menor e maior número</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 13)</pre></h1></header>
+    </header>
+
+    <h2>Digite 5 números INTEIROS com valores DIFERENTES e irei verificar qual é o maior e o menor.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite o primeiro número:</label>
+          <input id="cx-numero-1" type="number">
+        </div>
+    
+        <div>
+          <label for="">Digite o segundo número:</label>
+          <input id="cx-numero-2"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o terceiro número:</label>
+            <input id="cx-numero-3"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o quarto número:</label>
+            <input id="cx-numero-4"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o quinto número:</label>
+            <input id="cx-numero-5"  type="number">
+        </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="verificar_numeros"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_numero_1 = document.getElementById('cx-numero-1')
+        const cx_numero_2 = document.getElementById('cx-numero-2')
+        const cx_numero_3 = document.getElementById('cx-numero-3')
+        const cx_numero_4 = document.getElementById('cx-numero-4')
+        const cx_numero_5 = document.getElementById('cx-numero-5')
+
+        const numero_1 = Number(cx_numero_1.value)
+        const numero_2 = Number(cx_numero_2.value)
+        const numero_3 = Number(cx_numero_3.value)
+        const numero_4 = Number(cx_numero_4.value)
+        const numero_5 = Number(cx_numero_5.value)
+
+        //Processamento
+        const maior = verificar_maior(numero_1, numero_2, numero_3, numero_4, numero_5)
+        const menor = verificar_menor(numero_1, numero_2, numero_3, numero_4, numero_5)
+        const verificar_numeros = `\nMaior número: ${maior}\nMenor número: ${menor}\n`
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('verificar_numeros')
+            elemento_resultado.innerText = verificar_numeros
+        }
+
+
+function verificar_maior(num_1, num_2, num_3, num_4, num_5){
+    if((num_1 > num_2) && (num_1 > num_3) && (num_1 > num_4) && (num_1 > num_5)){
+        return num_1
+    }
+    else if((num_2 > num_1) && (num_2 > num_3) && (num_2 > num_4) && (num_2 > num_5)){
+        return num_2
+    }
+    else if((num_3 > num_1) && (num_3 > num_2) && (num_3 > num_4) && (num_3 > num_5)){
+        return num_3
+    }
+    else if((num_4 > num_1) && (num_4 > num_2) && (num_4 > num_3) && (num_4 > num_5)){
+        return num_4
+    }
+    else{
+        return num_5
+    }
+}
+
+
+function verificar_menor(num_1, num_2, num_3, num_4, num_5){
+    if((num_1 < num_2) && (num_1 < num_3) && (num_1 < num_4) && (num_1 < num_5)){
+        return num_1
+    }
+    else if((num_2 < num_1) && (num_2 < num_3) && (num_2 < num_4) && (num_2 < num_5)){
+        return num_2
+    }
+    else if((num_3 < num_1) && (num_3 < num_2) && (num_3 < num_4) && (num_3 < num_5)){
+        return num_3
+    }
+    else if((num_4 < num_1) && (num_4 < num_2) && (num_4 < num_3) && (num_4 < num_5)){
+        return num_4
+    }
+    else{
+        return num_5
+    }
+}
+
+
+    </script>
+
+</body>
+</html>

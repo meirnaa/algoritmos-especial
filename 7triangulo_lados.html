@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triângulo - lados</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 7)</pre></h1></header>
+    </header>
+
+    <h2>Digite 3 valores para lados e direi se formam um triângulo e o tipo.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite o primeiro lado:</label>
+          <input id="cx-lado1" type="number">
+        </div>
+    
+        <div>
+          <label for="">Digite o segundo lado:</label>
+          <input id="cx-lado2"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o terceiro lado:</label>
+            <input id="cx-lado3"  type="number">
+          </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_lado1 = document.getElementById('cx-lado1')
+        const cx_lado2 = document.getElementById('cx-lado2')
+        const cx_lado3 = document.getElementById('cx-lado3')
+
+        const lado1 = Number(cx_lado1.value)
+        const lado2 = Number(cx_lado2.value)
+        const lado3 = Number(cx_lado3.value)
+
+        //Processamento
+        const validar = entrada_eh_valida(lado1, lado2, lado3)
+        let resultado
+
+        if (validar === true) {
+
+        const pergunta = eh_triangulo(lado1, lado2, lado3)
+        const tipo = tipo_triangulo(lado1, lado2, lado3)
+
+            if(pergunta === false){
+                resultado = `\nOs lados não formam um triângulo.\n`
+            }
+            else{
+                resultado = `\nOs lados formam um triângulo do tipo ${tipo}.\n`
+            }
+        
+        } else if(validar === false) {
+            resultado = `\nNão existe lado com tamanho 0 (zero) ou negativo.\n`
+        }
+        
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+            elemento_resultado.innerText = resultado
+        }
+
+        
+function entrada_eh_valida(lado1, lado2, lado3){
+    if(lado1 > 0 && lado2 > 0 && lado3 > 0){
+        return true
+    }else{
+        return false
+    }
+}
+
+
+function eh_triangulo(lado1, lado2, lado3){   //(a soma de dois lados não pode ser menor que o terceiro lado)
+    if (lado1 + lado2 > lado3 && lado1 + lado3 > lado2 && lado2 + lado3 > lado1){
+        return true
+    }else{
+        return false
+    }
+}
+
+
+function tipo_triangulo(lado1, lado2, lado3){
+    if(lado1 === lado2 && lado2 === lado3){ //triângulo equilátero (3 lados iguais), 
+        return 'equilátero'
+    }
+    else if(lado1 !== lado2 && lado2 !== lado3 && lado3 !== lado1){ //escaleno (3 lados diferentes)
+        return 'escaleno'
+    }
+    else{ //isósceles (2 lados iguais)
+        return 'isósceles'
+    }
+}
+
+
+    </script>
+
+</body>
+</html>

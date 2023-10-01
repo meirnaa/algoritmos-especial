@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar data</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 10)</pre></h1></header>
+    </header>
+
+    <h2>Digite uma data e irei dizer se ela é válida.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Dia:</label>
+          <input id="cx-dia" type="number" placeholder="1 a 30">
+        </div>
+
+        <div>
+            <label for="">Mês:</label>
+            <input id="cx-mes" type="number" placeholder="1 a 12">
+          </div>
+
+        <div>
+           <label for="">Ano:</label>
+           <input id="cx-ano" type="number" placeholder="ex: 2023">
+        </div>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="verificar_data"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_dia = document.getElementById('cx-dia')
+        const cx_mes = document.getElementById('cx-mes')
+        const cx_ano = document.getElementById('cx-ano')
+
+        const dia = Number(cx_dia.value)
+        const mes = Number(cx_mes.value)
+        const ano = Number(cx_ano.value)
+
+        //Processamento
+        const verificar_data = data_eh_valida(dia, mes, ano)
+
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('verificar_data')
+            elemento_resultado.innerText = verificar_data
+        }
+
+        
+        function data_eh_valida(dia, mes, ano){
+        const dias_por_mes = [31, ano_eh_bissexto(ano) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        if(dia > 0 && dia <= dias_por_mes[mes - 1] && mes > 0 && mes <= 12 && ano >= 1) {
+            return `\nA data ${dia}/${mes}/${ano} é válida.\n`
+        }else{
+            return `\nA data ${dia}/${mes}/${ano} não é válida.\n`
+        }
+        }
+
+
+        function ano_eh_bissexto(ano){
+            return (ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0)
+        }
+
+        
+    </script>
+
+</body>
+</html>

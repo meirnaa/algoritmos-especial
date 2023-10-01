@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triângulo - ângulos</title>
+    <link rel ="stylesheet" href = "style.css">
+</head>
+<body>
+    <header>
+        <img src = "minha_logo.png" alt = "hello kitty">
+        <h1>Meus sites WEB<pre>    (questão 6)</pre></h1></header>
+    </header>
+
+    <h2>Digite 3 ângulos e direi se formam um triângulo e o tipo.</h2>
+
+    <form id="formulario" action="#">
+        <div>
+          <label for="">Digite o primeiro ângulo:</label>
+          <input id="cx-angulo1" type="number">
+        </div>
+    
+        <div>
+          <label for="">Digite o segundo ângulo:</label>
+          <input id="cx-angulo2"  type="number">
+        </div>
+
+        <div>
+            <label for="">Digite o terceiro ângulo:</label>
+            <input id="cx-angulo3"  type="number">
+          </div>
+    </form>
+
+    <div id="botoes">
+      <input onclick="window.location.reload()" type="submit" value="Limpar">
+      <input onclick="clique_botao_calcular()" type="submit" value="Calcular">
+    </div>
+
+    <h2></br></br>Resultado:</h2>
+    <p id="resultado"></p>
+      
+
+    <script>
+        function clique_botao_calcular(){
+        //Entrada
+        const cx_angulo1 = document.getElementById('cx-angulo1')
+        const cx_angulo2 = document.getElementById('cx-angulo2')
+        const cx_angulo3 = document.getElementById('cx-angulo3')
+
+        const angulo1 = Number(cx_angulo1.value)
+        const angulo2 = Number(cx_angulo2.value)
+        const angulo3 = Number(cx_angulo3.value)
+
+        //Processamento
+        const validar = entrada_eh_valida(angulo1, angulo2, angulo3)
+        const pergunta = eh_triangulo(angulo1, angulo2, angulo3)
+        const tipo = tipo_triangulo(angulo1, angulo2, angulo3)
+        let resultado 
+
+        if(validar === true) {
+
+            if(pergunta === true){
+                resultado = `\nOs ângulos formam um triângulo do tipo ${tipo}.\n`
+            }else{
+                resultado = `\nOs ângulos não formam um triângulo.\n`
+            }
+
+        } else if(validar === false) {
+            resultado = `\nNão existe ângulo com tamanho 0º (zero grau).\n`
+        }
+        
+        //Saída
+        //alert(resultado)
+        const elemento_resultado = document.getElementById('resultado')
+            elemento_resultado.innerText = resultado
+        }
+
+        
+        function entrada_eh_valida(angulo1, angulo2, angulo3){
+    if(angulo1 !== 0 && angulo2 !== 0 && angulo3 !== 0){
+        return true
+    }else{
+        return false
+    }
+}
+
+
+function eh_triangulo(angulo1, angulo2, angulo3){  
+    if ((angulo1 + angulo2 + angulo3) === 180){
+        return true
+    }
+    else{
+        return false
+    }
+}
+
+
+function tipo_triangulo(angulo1, angulo2, angulo3){
+    if(angulo1 < 90 && angulo2 < 90 && angulo3 < 90){ //triângulo acutângulo (3 ângulos < 90º), 
+        return 'acutângulo'
+    }
+    else if(angulo1 === 90 || angulo2 === 90 || angulo3 === 90){ // retângulo (1 ângulo = 90º)
+        return 'retângulo'
+    }
+    else{ //obtusângulo (1 ângulo > 90º)
+        return 'obtusângulo'
+    }
+}
+
+
+    </script>
+
+</body>
+</html>
