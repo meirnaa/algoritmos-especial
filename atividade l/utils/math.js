@@ -1,6 +1,5 @@
 import { print } from "./input.js"
 
-
 export function meu_fatorial(number){
   if (number === 0) return 1
 
